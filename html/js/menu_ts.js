@@ -6,6 +6,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -900,6 +902,16 @@ function openPopUp(dataType, element) {
             var input = content.createInput("text", dbKey, data[dbKey]);
             input.setAttribute("placeholder", "{{.playlist.fileM3U.placeholder}}");
             content.appendRow("{{.playlist.fileM3U.title}}", input);
+            // URL - User Agent
+            var dbKey = "file.httpUserAgent";
+            var input = content.createInput("text", dbKey, data[dbKey]);
+            input.setAttribute("placeholder", "{{.playlist.m3uHttpUserAgent.placeholder}}");
+            content.appendRow("{{.playlist.fileM3uHttpUserAgent.title}}", input);
+            // URL - HTTP Referer
+            var dbKey = "file.httpReferer";
+            var input = content.createInput("text", dbKey, data[dbKey]);
+            input.setAttribute("placeholder", "{{.playlist.m3uHttpReferer.placeholder}}");
+            content.appendRow("{{.playlist.fileM3uHttpReferer.title}}", input);
             // Tuner
             if (SERVER["settings"]["buffer"] != "-") {
                 var text = new Array();

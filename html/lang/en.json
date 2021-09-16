@@ -158,6 +158,18 @@
       "placeholder": "File path or URL of the M3U",
       "description": ""
     },
+    "fileM3uHttpUserAgent":
+    {
+      "title": "M3U HTTP User Agent",
+      "placeholder": "HTTP user agent",
+      "description": ""
+    },
+    "fileM3uHttpReferer":
+    {
+      "title": "M3U HTTP Referer",
+      "placeholder": "HTTP referer",
+      "description": ""
+    },
     "fileHDHR":
     {
       "title": "HDHomeRun IP",
@@ -502,6 +514,18 @@
       "title": "M3U Playlist",
       "placeholder": "File path or URL of the M3U",
       "description": "Local or remote playlists"
+    },
+    "fileM3uHttpUserAgent":
+    {
+      "title": "M3U HTTP User Agent",
+      "placeholder": "HTTP user agent",
+      "description": ""
+    },
+    "fileM3uHttpReferer":
+    {
+      "title": "M3U HTTP Referer",
+      "placeholder": "HTTP referer",
+      "description": ""
     },
     "xmltv":
     {

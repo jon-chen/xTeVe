@@ -67,6 +67,21 @@ class WizardItem extends WizardCategory {
         input.id = key
         doc.appendChild(input)
 
+        // URL - User Agent
+        var dbKey:string = "file.httpUserAgent";
+        var input = content.createInput("text", dbKey, "");
+        input.setAttribute("placeholder", "{{.wizard.fileM3uHttpUserAgent.placeholder}}");
+        input.setAttribute("class", "wizard")
+        doc.appendChild(input);
+
+        // URL - HTTP Referer
+        var dbKey:string = "file.httpReferer";
+        var input = content.createInput("text", dbKey, "");
+        input.setAttribute("placeholder", "{{.wizard.fileM3uHttpReferer.placeholder}}");
+        input.setAttribute("class", "wizard")
+        doc.appendChild(input);
+
+
         description = "{{.wizard.m3u.description}}"
 
         break

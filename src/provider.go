@@ -18,6 +18,7 @@ func getProviderData(fileType, fileID string) (err error) {
 	var body = make([]byte, 0)
 	var newProvider = false
 	var dataMap = make(map[string]interface{})
+	var headers = http.Header{}
 
 	var saveDateFromProvider = func(fileSource, serverFileName, id string, body []byte) (err error) {
 
@@ -165,15 +166,31 @@ func getProviderData(fileType, fileID string) (err error) {
 			// Laden vom HDHomeRun Tuner
 			showInfo("Tuner:" + fileSource)
 			var tunerURL = "http://" + fileSource + "/lineup.json"
-			serverFileName, body, err = downloadFileFromServer(tunerURL)
+			serverFileName, body, err = downloadFileFromServer(tunerURL, headers)
 
 		default:
+
+			if fileType == "m3u" {
+				if data["file.httpUserAgent"] != nil {
+					headers.Set("User-Agent", data["file.httpUserAgent"].(string))
+				}
+				if data["file.httpReferer"] != nil {
+					headers.Set("Referer", data["file.httpReferer"].(string))
+				}
+			}
 
 			if strings.Contains(fileSource, "http://") || strings.Contains(fileSource, "https://") {
 
 				// Laden vom Remote Server
 				showInfo("Download:" + fileSource)
-				serverFileName, body, err = downloadFileFromServer(fileSource)
+
+				for key, val := range headers {
+					for i := range val {
+						showInfo("Header:" + key + "=" + val[i])
+					}
+				}
+
+				serverFileName, body, err = downloadFileFromServer(fileSource, headers)
 
 			} else {
 
@@ -275,14 +292,22 @@ func getProviderData(fileType, fileID string) (err error) {
 	return
 }
 
-func downloadFileFromServer(providerURL string) (filename string, body []byte, err error) {
+func downloadFileFromServer(providerURL string, headers http.Header) (filename string, body []byte, err error) {
 
 	_, err = url.ParseRequestURI(providerURL)
 	if err != nil {
 		return
 	}
 
-	resp, err := http.Get(providerURL)
+	client := http.Client{}
+	req, err := http.NewRequest("GET", providerURL, nil)
+	if err != nil {
+		return
+	}
+
+	req.Header = headers
+
+	resp, err := client.Do(req)
 	if err != nil {
 		return
 	}

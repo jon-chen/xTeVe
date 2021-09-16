@@ -676,6 +676,8 @@ func saveWizard(request RequestStruct) (nextStep int, err error) {
 			case "m3u":
 				filesMap = Settings.Files.M3U
 				data["name"] = "M3U"
+				data["file.httpReferer"] = (wizard["file.httpReferer"]).(string)
+				data["file.httpUserAgent"] = (wizard["file.httpUserAgent"]).(string)
 				indicator = "M"
 
 			case "xmltv":

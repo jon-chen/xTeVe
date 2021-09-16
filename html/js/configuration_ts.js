@@ -6,6 +6,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -66,6 +68,18 @@ var WizardItem = /** @class */ (function (_super) {
                 input.setAttribute("placeholder", "{{.wizard.m3u.placeholder}}");
                 input.setAttribute("class", "wizard");
                 input.id = key;
+                doc.appendChild(input);
+                // URL - User Agent
+                var dbKey = "file.httpUserAgent";
+                var input = content.createInput("text", dbKey, "");
+                input.setAttribute("placeholder", "{{.wizard.fileM3uHttpUserAgent.placeholder}}");
+                input.setAttribute("class", "wizard");
+                doc.appendChild(input);
+                // URL - HTTP Referer
+                var dbKey = "file.httpReferer";
+                var input = content.createInput("text", dbKey, "");
+                input.setAttribute("placeholder", "{{.wizard.fileM3uHttpReferer.placeholder}}");
+                input.setAttribute("class", "wizard");
                 doc.appendChild(input);
                 description = "{{.wizard.m3u.description}}";
                 break;

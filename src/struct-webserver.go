@@ -61,10 +61,12 @@ type RequestStruct struct {
 
 	// Wizard
 	Wizard struct {
-		EpgSource *string `json:"epgSource,omitempty"`
-		M3U       *string `json:"m3u,omitempty"`
-		Tuner     *int    `json:"tuner,omitempty"`
-		XMLTV     *string `json:"xmltv,omitempty"`
+		EpgSource        *string `json:"epgSource,omitempty"`
+		M3U              *string `json:"m3u,omitempty"`
+		M3UHttpReferer   *string `json:"file.httpReferer"`
+		M3UHttpUserAgent *string `json:"file.httpUserAgent"`
+		Tuner            *int    `json:"tuner,omitempty"`
+		XMLTV            *string `json:"xmltv,omitempty"`
 	} `json:"wizard,omitempty"`
 }
 

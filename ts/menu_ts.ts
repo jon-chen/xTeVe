@@ -1112,6 +1112,18 @@ function openPopUp(dataType, element) {
       input.setAttribute("placeholder", "{{.playlist.fileM3U.placeholder}}")
       content.appendRow("{{.playlist.fileM3U.title}}", input)
 
+      // URL - User Agent
+      var dbKey:string = "file.httpUserAgent";
+      var input = content.createInput("text", dbKey, data[dbKey]);
+      input.setAttribute("placeholder", "{{.playlist.m3uHttpUserAgent.placeholder}}");
+      content.appendRow("{{.playlist.fileM3uHttpUserAgent.title}}", input);
+
+      // URL - HTTP Referer
+      var dbKey:string = "file.httpReferer";
+      var input = content.createInput("text", dbKey, data[dbKey]);
+      input.setAttribute("placeholder", "{{.playlist.m3uHttpReferer.placeholder}}");
+      content.appendRow("{{.playlist.fileM3uHttpReferer.title}}", input);
+
       // Tuner
       if (SERVER["settings"]["buffer"] != "-") {
         var text:string[] = new Array()
